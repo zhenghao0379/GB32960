@@ -62,18 +62,18 @@ def hexlist2(data, n=1):
 
 # 公共函数
 # 字符串分割
-data_s = ""
-data_f = ""
-data_m = ""
-def str_split(data, n):
-    global data_s, data_f, data_2
-    data_s = data[:n]
-    data_f = data[n:]
-    data_m = data_f[0:2]
+# data_s = ""
+# data_f = ""
+# data_m = ""
+# def str_split(data, n):
+#     global data_s, data_f, data_2
+#     data_s = data[:n]
+#     data_f = data[n:]
+#     data_m = data_f[0:2]
 
-# 
-dict_cf_g = {}
-dict_jx_g = {}
+# # 
+# dict_cf_g = {}
+# dict_jx_g = {}
 
 # 报文解析-------------------------------------------------------------------
 # 解析列表
@@ -117,3 +117,10 @@ class globleVar(object):
     
     def getGlobleVar(self):
         return self.data
+
+
+def bcc(data):
+    if True:
+        return True
+    else :
+        return False

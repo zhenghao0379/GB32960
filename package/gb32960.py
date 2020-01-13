@@ -1,3 +1,4 @@
+# o  原始（string）
 # oj 原始（json）
 # ol 原始（dataframe）
 # pj 解析（json）
@@ -36,11 +37,6 @@ class gb32960(object):
         return 
         
 ######################################################
-# 数据采集时间
-class bw_datetime():
-    def __init__(self, datetime):
-        self.datetime = bw_datetime(datetime)
-
 # 起始部分
 class fun_01to06(object):
     def __init__(self, data):
@@ -65,33 +61,87 @@ class fun_01to06(object):
             "数据单元长度":hex2dec(self.oj["数据单元长度"]),
         }
         self.pl = pd.DataFrame.from_dict(self.pj,orient='index').T
+
         self.next = data[cf_a[-1]:]
         self.nextMark = data[cf_a[-1]:cf_a[-1]+2]
         self.mo = self.oj["命令标识"]
+
+# 数据采集时间
+class getTime(object):
+    def __init__(self, data):
+        cf = [6]
+        cf_a = hexlist2(cf)
+        self.o = data[0:cf_a[-1]]
+        self.datetime = bw_datetime(self.o)
+
+        self.next = data[cf_a[-1]:]
+        self.nextMark = data[cf_a[-1]:cf_a[-1]+2]
 
 # 效验码
 class fun_08():
     def __init__(self, data):
         self.o = data[-1]
-    
-    def BCC(self):
-        return 
+        self.bcc = False
+    def BCC(self, data):
+        if bcc(data):
+            return self.bcc = True
+        else :
+            return self.bcc = False
+
 # 数据单元
 class fun_07():
     def __init__(self):
-        return
-    def o():
-        return
-    def p():
-        return 
+        if =="02" or =="03":
+            self.o = 
+            self.oj = 
+            self.ol = 
+            self.pj = 
+            self.pl = 
+        elif == "01":
+            self = fun_07_01()
+        elif == "03":
+            self.o = 
+            self.oj = 
+            self.ol = 
+            self.pj = 
+            self.pl = 
+        elif == "04":
+            self.o = 
+            self.oj = 
+            self.ol = 
+            self.pj = 
+            self.pl = 
+        elif == "05":
+            self.o = 
+            self.oj = 
+            self.ol = 
+            self.pj = 
+            self.pl = 
+        elif == "06":
+            self.o = 
+            self.oj = 
+            self.ol = 
+            self.pj = 
+            self.pl = 
 
 # 车辆登入
 class fun_07_01():
     def __init__(self):
-        return
+        self.
 
 # 信息上报(实时&补发)
-class fun_07_02and03():
+class fun_07_02():
+    def __init__(self):
+        self.oj = 
+    def o(self):
+        self.o = 
+
+
+
+
+
+
+
 
 # 车辆登出
 class fun_07_04():
@@ -117,10 +167,14 @@ class fun_07_02_m():
 
 # 剩余报文
 class surplus():
-    def __init__(self):
-        pass
-    def 
+    self.markList = []
+    def __init__(self, data):
+        self.data = data
+        self.mark = data[0:2]
+        
 
+    def markList(self):
+        self.markList.append(self.mark)
 
 # 全局变量（剩余报文）
 
