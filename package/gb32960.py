@@ -17,7 +17,7 @@ from public_fun import *
 
 ######################################################
 # 主体
-class gb32960(data):
+class gb32960(object):
     def __init__(self):
         self.oj = self.oj()
         self.ol = self.ol()
@@ -33,7 +33,7 @@ class gb32960(data):
     def pl(self):
         return 
     def custom(self):
-        return
+        return 
         
 ######################################################
 # 数据采集时间
@@ -65,20 +65,16 @@ class fun_01to06(object):
             "数据单元长度":hex2dec(self.oj["数据单元长度"]),
         }
         self.pl = pd.DataFrame.from_dict(self.pj,orient='index').T
-        self.next = 
-        self.nextMark = 
-        
+        self.next = data[cf_a[-1]:]
+        self.nextMark = data[cf_a[-1]:cf_a[-1]+2]
+        self.mo = self.oj["命令标识"]
 
 # 效验码
-class fun_08()
+class fun_08():
     def __init__(self, data):
         self.o = data[-1]
     
     def BCC(self):
-        if 
-
-
-
         return 
 # 数据单元
 class fun_07():
@@ -95,7 +91,7 @@ class fun_07_01():
         return
 
 # 信息上报(实时&补发)
-class fun_07_02():
+class fun_07_02and03():
 
 # 车辆登出
 class fun_07_04():

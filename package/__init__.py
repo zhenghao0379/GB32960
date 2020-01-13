@@ -1,3 +1,2 @@
+from . import gb32960
 from . import public
-from . import bw_cf
-from . import bw_jx

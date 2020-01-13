@@ -104,3 +104,16 @@ jx_dict = {
     "07_02_04_01":["启动", "关闭", "异常", "无效"],
     "07_05_05":["不加密", "RSA加密", "AES128位加密", "异常", "无效"],
 }
+
+
+# 全局变量
+class globleVar(object):
+    def __init__(self, data):
+        self.data = data
+        self.nextMark = data[0:2]
+    
+    def setGlobleVar(self, data):
+        self.data = data
+    
+    def getGlobleVar(self):
+        return self.data
