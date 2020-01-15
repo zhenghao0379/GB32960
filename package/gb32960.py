@@ -67,7 +67,7 @@ class fun_01to06(object):
         self.mo = self.oj["命令标识"]
 
 # 数据采集时间
-class getTime(object):
+class fun_datetime(object):
     def __init__(self, data):
         cf = [6]
         cf_a = hexlist2(cf)
