@@ -4,7 +4,6 @@ import pandas as pd
 import binascii
 import datetime
 import math
-import json
 import re
 
 # 公共函数
@@ -36,16 +35,8 @@ def hex2str(x):
     output = binascii.a2b_hex(x).decode("utf8")
     return output
 
-# 多值拆分列表后计算
-def hex2list(data, num=1, kn=0, kk=1, ke=False):
-    num = num * 2
-    n = '.{'+str(num)+'}'
-    output = re.findall(n, data) 
-    output = [hex2dec(i, n=kn ,k=kk ,e=ke) for i in output]
-    return output
-
 # 时间
-def bw_datetime(x):
+def get_datetime(x):
     year = hex2dec(x[0:2]) + 2000
     month = hex2dec(x[2:4])
     day = hex2dec(x[4:6])
@@ -55,6 +46,17 @@ def bw_datetime(x):
     output = datetime.datetime(year, month, day, hour, minute, second).strftime('%Y-%m-%d %H:%M:%S')
     return output
 
+# 构建
+def list2dict(data, list_o, cf_a, mode='s'):
+    dict_o = {}
+    if mode == 's':
+        for i in range(len(cf_a)-1):
+            dict_o[list_o[i]] = data[cf_a[i]:cf_a[i+1]]
+        return dict_o
+    elif mode == 'l':
+        for i in range(len(cf_a)-1):
+            dict_o[list_o[i]] = [data[cf_a[i]:cf_a[i+1]]]
+        return dict_o
 
 # 累加
 def hexlist2(data, n=1):
@@ -65,8 +67,25 @@ def hexlist2(data, n=1):
     output = [i*2 for i in output]
     return output
 
+# 列表
+def hex2list(data, num=1, kn=0, kk=1, ke=False):
+    num = num * 2
+    n = '.{'+str(num)+'}'
+    output = re.findall(n, data) 
+    output = [hex2dec(i, n=kn ,k=kk ,e=ke) for i in output]
+    return output
 
-# 报文解析-------------------------------------------------------------------
+# 报文解析
+# 解析替换函数
+def dict_list_replace(n, x):
+    x = x.upper()
+    try:
+        index = jx_dict_o[n].index(x)
+        output = jx_dict[n][index]
+    except:
+        output = "ERROR"
+    return output
+
 # 解析列表
 jx_dict_o = {
     "02":["01", "02", "03", "04", "05", "06"],
@@ -76,7 +95,7 @@ jx_dict_o = {
     "07_02_01_02":["01", "02", "03", "04", "FE", "FF"],
     "07_02_01_03":["01", "02", "03", "FE", "FF"],
     "07_02_01_06":["01", "02", "FE", "FF"],
-    "07_02_02_01":["01", "02", "03", "04", "FE", "FF"],
+    "07_02_02_02":["01", "02", "03", "04", "FE", "FF"],
     "07_02_03_12":["01", "02", "FE", "FF"],
     "07_02_04_01":["01", "02", "FE", "FF"],
     "07_05_05":["01", "02", "03", "FE", "FF"],
@@ -90,21 +109,9 @@ jx_dict = {
     "07_02_01_02":["停车充电", "行驶充电", "未充电", "充电完成", "异常", "无效"],
     "07_02_01_03":["纯电", "混动", "燃油", "异常", "无效"],
     "07_02_01_06":["工作", "断开", "异常", "无效"],
-    "07_02_02_01":["耗电", "发电", "关闭", "准备", "异常", "无效"],
+    "07_02_02_02":["耗电", "发电", "关闭", "准备", "异常", "无效"],
     "07_02_03_12":["工作", "断开", "异常", "无效"],
     "07_02_04_01":["启动", "关闭", "异常", "无效"],
     "07_05_05":["不加密", "RSA加密", "AES128位加密", "异常", "无效"],
 }
 
-
-# 全局变量
-class globleVar(object):
-    def __init__(self, data):
-        self.data = data
-        self.nextMark = data[0:2]
-    
-    def setGlobleVar(self, data):
-        self.data = data
-    
-    def getGlobleVar(self):
-        return self.data

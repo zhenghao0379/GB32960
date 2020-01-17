@@ -1,3 +1,2 @@
-from . import gb32960
-from . import public_fun
-from . import globalVar
+from .gb32960 import *
+from .public_fun import *

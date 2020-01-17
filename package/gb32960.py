@@ -1,8 +1,7 @@
 # import Ipynb_importer
 import pandas as pd
-from public_fun import *
 
-
+from .public_fun import * 
 
 import globalVar as glv
 
@@ -189,7 +188,7 @@ class fun_07_05(object):
 
 ## fun_07_06
 
-class fun_07_07(object):
+class fun_07_06(object):
     def __init__(self, data):
         self.cf = [6, 2]
         self.cf_a = hexlist2(self.cf)
@@ -261,7 +260,7 @@ class fun_07_02:
                 print(glv.get_value('data_f'))
                 print(glv.get_value('m_07_02'))
             
-        do_list = self.do_list.sort()
+        self.do_list.sort()
         for i in self.do_list:
             if i == '01':
                 self.oj = dict(self.oj,**self.f_01.oj2)
