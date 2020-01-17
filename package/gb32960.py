@@ -3,7 +3,21 @@ import pandas as pd
 
 from .public_fun import * 
 
-import globalVar as glv
+# 全局变量
+
+class glv:
+    def _init():
+        global _global_dict
+        _global_dict = {}
+ 
+    def set_value(key,value):
+        _global_dict[key] = value
+    
+    def get_value(key,defValue=None):
+        try:
+            return _global_dict[key]
+        except KeyError:
+            return defValue
 
 ## fun_01to06
 
