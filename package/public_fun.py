@@ -4,10 +4,8 @@ import pandas as pd
 import binascii
 import datetime
 import math
-
-
-
-
+import json
+import re
 
 # 公共函数
 # 8进制转10进制
@@ -38,6 +36,14 @@ def hex2str(x):
     output = binascii.a2b_hex(x).decode("utf8")
     return output
 
+# 多值拆分列表后计算
+def hex2list(data, num=1, kn=0, kk=1, ke=False):
+    num = num * 2
+    n = '.{'+str(num)+'}'
+    output = re.findall(n, data) 
+    output = [hex2dec(i, n=kn ,k=kk ,e=ke) for i in output]
+    return output
+
 # 时间
 def bw_datetime(x):
     year = hex2dec(x[0:2]) + 2000
@@ -59,21 +65,6 @@ def hexlist2(data, n=1):
     output = [i*2 for i in output]
     return output
 
-
-# 公共函数
-# 字符串分割
-# data_s = ""
-# data_f = ""
-# data_m = ""
-# def str_split(data, n):
-#     global data_s, data_f, data_2
-#     data_s = data[:n]
-#     data_f = data[n:]
-#     data_m = data_f[0:2]
-
-# # 
-# dict_cf_g = {}
-# dict_jx_g = {}
 
 # 报文解析-------------------------------------------------------------------
 # 解析列表
@@ -117,10 +108,3 @@ class globleVar(object):
     
     def getGlobleVar(self):
         return self.data
-
-
-def bcc(data):
-    if True:
-        return True
-    else :
-        return False

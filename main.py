@@ -2,7 +2,10 @@
 import numpy as np
 import pandas as pd
 
-from package import *
+from package.gb32960 import *
+
+
+
 
 ######################################################
 # 单个处理
@@ -18,14 +21,6 @@ print(data_unit.pl)
 ######################################################
 # 批量处理
 # 获取原始数据
-def read_data(filepath, tpye="excel"):
-    if type == "excel":
-        df_data = pd.read_excel(filepath)
-        return df_data
-    elif type == "sql":
-        pass
-    else:
-        return("Error!")
 
 # 多线程：拆分——map——合并
 
