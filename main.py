@@ -21,18 +21,16 @@ print(data_unit.pl)
 
 # 多线程：拆分——map——合并
 
-map()
-
-
-
 
 # 生成excel
 
-# sheet0：原始
+# sheet1：原始
 
-# sheet1：登入登出
+# sheet2：登入登出
 
-# sheet2：实时&补发
+# sheet3：实时&补发
 
-# sheet3：
+# sheet4：统计
+
+# sheet5: GPS分布
 

@@ -241,7 +241,7 @@ class fun_07_02:
         glv.set_value('data_f', data[12:])
         glv.set_value('m_07_02', data[12:14])
         
-        self.mo_list = ['01','02','03','04','05','06','07','08','09']
+        self.mo_list = glv.get_value('model')
         self.do_list = []
         
         while(glv.get_value('m_07_02') in self.mo_list):
@@ -488,7 +488,7 @@ class fun_07_02_02(object):
         
         glv.set_value('data_07_02_02', self.o)
         
-        print("fun_07_02_02 done!")
+        print('fun_07_02_02 done!')
         
     #  oj
     def fun_oj(self):
@@ -1026,6 +1026,7 @@ class fun_07_cursor:
             self.o = data[:-2]
         elif len(data) < 2:
             print("错误")
+            self.o = None
         else :
             self.o = None
             
@@ -1038,7 +1039,7 @@ class fun_07_cursor:
 
 class fun_08:
     def __init__(self, data):
-        self.o = data[-2:]
+        self.o = glv.get_value('bcc')
         
         self.oj = self.pj = {'校验码':self.o}
         self.ol = self.pl = pd.DataFrame({'校验码':[self.o]})
@@ -1051,15 +1052,21 @@ class gb32960:
     
     glv._init()
     
-    def __init__(self, data):
+    def __init__(self, data, model=['01','02','03','04','05','06','07','08','09']):
         
+        glv.set_value('model', model)
         data = data.upper()
+        bcc = data[-2:]
+        glv.set_value('bcc', bcc)
+
+        data = data[:-2]
         glv.set_value('data_f', data)
+        
         
         self.o = data
         self.f_01 = fun_01to06(glv.get_value('data_f'))
         self.f_07 = fun_07(glv.get_value('data_f'))
-        self.f_08 = fun_08(glv.get_value('data_f'))     
+        self.f_08 = bcc
         
         
         self.oj = dict(self.f_01.oj, **self.f_07.oj)
@@ -1075,4 +1082,6 @@ class gb32960:
         self.pl = pd.merge(self.f_01.pl, self.f_07.pl, left_index=True, right_index=True)
         self.pl = pd.merge(self.pl, self.f_08.pl, left_index=True, right_index=True)
         
+        self.m = glv.get_value('data_mo')
+
         print("all done!")
