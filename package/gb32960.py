@@ -1083,5 +1083,4 @@ class gb32960:
         self.pl = pd.merge(self.pl, self.f_08.pl, left_index=True, right_index=True)
         
         self.m = glv.get_value('data_mo')
-
         print("all done!")
