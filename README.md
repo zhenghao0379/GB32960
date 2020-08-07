@@ -11,7 +11,8 @@
 
 ## 使用说明
 
-见 \main.ipynb
+\convert_your_csv.ipynb
+一路向下shift+enter就完事了
 
 
 
